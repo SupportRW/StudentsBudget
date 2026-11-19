@@ -1,8 +1,8 @@
-import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import type { Entry } from '../src/db/types';
 import { MESSAGES } from '../src/i18n/messages';
 import { openApp } from './helpers/app';
+import { noSeriousAxeFindings } from './helpers/axe';
 import { putEntries, type EntrySeed } from './helpers/entries';
 import { heading } from './helpers/pages';
 import { seedSetup } from './helpers/seed-setup';
@@ -43,14 +43,6 @@ const editPanel = (page: Page) => list(page).getByRole('region', { name: t.entri
 
 /** The new-entry form's panel for the chosen type. */
 const typePanel = (page: Page, type: 'Expense' | 'Income') => page.getByRole('tabpanel', { name: type, exact: true });
-
-async function noSeriousAxeFindings(page: Page) {
-  const results = await new AxeBuilder({ page })
-    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
-    .analyze();
-  const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
-  expect(serious.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);
-}
 
 test.beforeEach(async ({ context }) => {
   // Nothing but this machine answers: a host no helper mocks is refused rather than reached.
