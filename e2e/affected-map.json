@@ -1,0 +1,36 @@
+{
+  "$comment": [
+    "Which e2e specs a run started by hand picks (scripts/ci-affected.mjs). A changed module picks the specs of every route whose page imports it, directly or through other modules.",
+    "routes: each route (a folder under src/app with a page file, named as the folder is) and the specs that open it, by file name without .spec.ts. 'all' marks a route every spec passes through: Home, where seedSetup ends, and Tips, where it writes the plan (e2e/helpers/seed-setup.ts). A change that reaches one runs every spec.",
+    "allOnly: specs that open only routes marked 'all', so they run whenever one of those is reached.",
+    "The smoke spec runs with every list and needs no entry. A route with [] has no spec of its own yet: a new spec that opens it is added here, or scripts/ci-affected.test.mjs fails.",
+    "The unit tests fail when a route or a spec is missing here, or when this names one that doesn't exist."
+  ],
+  "routes": {
+    "/": "all",
+    "/badges": [],
+    "/charts": [],
+    "/check-in": [],
+    "/entries": [],
+    "/entries/new": [],
+    "/impressum": [],
+    "/privacy": [],
+    "/reveal": [],
+    "/settings": [],
+    "/settings/account": [],
+    "/settings/accounts": [],
+    "/settings/appearance": [],
+    "/settings/backup": [],
+    "/settings/import": [],
+    "/settings/moderation": [],
+    "/settings/plan": [],
+    "/settings/profile": [],
+    "/settings/reminder": [],
+    "/setup": [],
+    "/start": [],
+    "/start/new-account": [],
+    "/start/sign-in": [],
+    "/tips": "all"
+  },
+  "allOnly": []
+}
