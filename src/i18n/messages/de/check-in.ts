@@ -12,7 +12,7 @@ export const checkIn: Messages['checkIn'] = {
     envelopes: 'Umschläge diese Woche',
     bar: (category) => `${category} diese Woche`,
     logged: 'Diese Woche',
-    empty: 'Diese Woche ist noch nichts erfasst.',
+    empty: 'Diese Woche ist noch nichts erfasst. Trag deine erste Ausgabe oben mit „Schnell erfassen“ ein.',
   },
   // Die Tage dieser Woche, die noch im Vormonat liegen.
   earlierThisWeek: {

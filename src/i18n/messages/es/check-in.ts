@@ -12,7 +12,7 @@ export const checkIn: Messages['checkIn'] = {
     envelopes: 'Sobres de esta semana',
     bar: (category) => `${category} esta semana`,
     logged: 'Esta semana',
-    empty: 'Esta semana aún no hay nada registrado.',
+    empty: 'Esta semana aún no hay nada registrado. Añade tu primer gasto arriba con Añadir rápido.',
   },
   // Los días de esta semana que aún caen en el mes anterior.
   earlierThisWeek: {

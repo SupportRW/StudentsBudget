@@ -16,7 +16,7 @@ export const checkIn = {
     envelopes: 'Envelopes this week',
     bar: (category: string) => `${category} this week`,
     logged: 'This week',
-    empty: 'Nothing logged this week yet.',
+    empty: 'Nothing logged this week yet. Add your first expense with quick add above.',
   },
   earlierThisWeek: {
     envelopes: 'Envelopes earlier this week',

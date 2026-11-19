@@ -13,7 +13,7 @@ export const checkIn: Messages['checkIn'] = {
     envelopes: 'Enveloppes de la semaine',
     bar: (category) => `${category} cette semaine`,
     logged: 'Cette semaine',
-    empty: 'Rien de saisi cette semaine pour l’instant.',
+    empty: 'Rien de saisi cette semaine pour l’instant. Ajoute ta première dépense avec l’ajout rapide ci-dessus.',
   },
   // Les jours de cette semaine qui tombent encore dans le mois précédent.
   earlierThisWeek: {
