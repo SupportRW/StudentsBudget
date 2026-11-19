@@ -1,4 +1,5 @@
 import { expect, type Page } from '@playwright/test';
+import type { Account } from '../../src/db/types';
 import { openApp, waitForHome } from './app';
 import { acceptPrivacyNotes } from './privacy';
 
@@ -96,6 +97,33 @@ export async function readStore<T>(page: Page, store: string): Promise<T[]> {
       }),
     store,
   ) as Promise<T[]>;
+}
+
+/**
+ * Writes accounts straight into IndexedDB, as Settings → Accounts and transfers would have saved them before setup.
+ * The database must exist (any page opened with `openApp`), and a page that is open doesn't notice the write: open the
+ * page under test afterwards.
+ */
+export async function putAccounts(page: Page, accounts: Account[]) {
+  await page.evaluate(
+    (rows) =>
+      new Promise<void>((resolve, reject) => {
+        const open = indexedDB.open('studentsbudget');
+        open.onerror = () => reject(open.error);
+        open.onsuccess = () => {
+          const db = open.result;
+          const transaction = db.transaction('accounts', 'readwrite');
+          for (const row of rows) transaction.objectStore('accounts').put(row);
+          transaction.oncomplete = () => {
+            db.close();
+            resolve();
+          };
+          transaction.onerror = () => reject(transaction.error);
+          transaction.onabort = () => reject(transaction.error);
+        };
+      }),
+    accounts,
+  );
 }
 
 /** The day the fixture's numbers assume: the 300 fee is spread from October to March, and plans are created on it. */

@@ -26,7 +26,8 @@ export async function openApp(page: Page, path: string) {
  * Waits until Home shows the plan: Quick add renders only once Home has read the saved plan, so it is there and live.
  * After the wizard's Save, the router may first have to wait for the dev server to compile '/', hence the long budget.
  */
-export async function waitForHome(page: Page) {
-  await expect(page.getByRole('textbox', { name: 'Quick add' })).toBeVisible({ timeout: READY_TIMEOUT });
+export async function waitForHome(page: Page, quickAddLabel = 'Quick add') {
+  // `quickAddLabel`: the field's name in the phone's language, for a spec that runs in another one.
+  await expect(page.getByRole('textbox', { name: quickAddLabel })).toBeVisible({ timeout: READY_TIMEOUT });
   await expect(page).toHaveURL('/');
 }
